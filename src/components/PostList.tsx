@@ -12,13 +12,13 @@ export function PostList({allPosts}) {
 
     return (
         <article className="postListContainer">
-        {posts.map(post => (
-            <section key={post.id}>
-                <h3>{post.title}</h3>
-                <span>{post.user.name}</span>
-            </section>
-        ))}
-        <button onClick={() => setEndListPost(endListPost + 10)}>Mais posts</button>
+            {posts.map(post => (
+                <section key={post.id}>
+                    <h3>{post.title}</h3>
+                    <span>{post.user.name}</span>
+                </section>
+            ))}
+            <button onClick={() => setEndListPost(endListPost + 10)}>Mais posts</button>
         </article>
     )
 }

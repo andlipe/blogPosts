@@ -1,16 +1,16 @@
 import { GetServerSideProps } from 'next';
 import React from 'react'
 import { PostList } from '../components/PostList';
+import style from '../../styles/pages/Home.module.css';
 interface HomeProps {
   postList: Array<{}>;
 }
 
 export default function Home(props: HomeProps) {
-  const firstRender = React.useRef(true);
 
   return (
   <>
-  <main>
+  <main className={style.container}>
       <h1>Posts mais recentes</h1>
       <section className="">
       <PostList allPosts={props.postList}/>
