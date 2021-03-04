@@ -1,41 +1,23 @@
 import { GetServerSideProps } from 'next';
 import React from 'react'
-import { Post } from '../components/Post';
+import { PostList } from '../components/PostList';
 interface HomeProps {
   postList: Array<{}>;
 }
 
 export default function Home(props: HomeProps) {
-  const [posts, setPosts] = React.useState([])
   const firstRender = React.useRef(true);
-  const [endListPost, setEndListPost] = React.useState(10);
 
-  React.useEffect(() => {
-    
-    console.log(props.postList)
-    const paginatePosts = props.postList.slice(0, endListPost);
-    setPosts(paginatePosts);
-    firstRender.current = false;
-  }, [endListPost]);
-  
-  
-  if(!firstRender.current) {
   return (
-    <main>
+  <>
+  <main>
       <h1>Posts mais recentes</h1>
-      <div>
-      {posts.map(post => (
-        <Post 
-          id={post.id}
-          title={post.title} 
-          autorName={post.user.name} 
-          />
-      ))}
-      </div>
-      <button onClick={() => setEndListPost(endListPost + 10)}>Mais posts</button>
+      <section className="">
+      <PostList allPosts={props.postList}/>
+      </section>
     </main>
+  </>  
   )
-  }
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
