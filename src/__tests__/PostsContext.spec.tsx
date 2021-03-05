@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { PostsProvider, PostsContext } from '../contexts/PostsContext';
+import { render, fireEvent } from '@testing-library/react';
+import { PostsProvider } from '../contexts/PostsContext';
 import { PostList } from '../components/PostList';
 import mockData from './mockData.json';
 describe('PostsContextTest', () => {
@@ -15,4 +15,12 @@ describe('PostsContextTest', () => {
         const focusPost = container.querySelector('h2').innerHTML;
         expect(getAllByText(focusPost).length).toEqual(1);
     });
+
+    it('should render 10 more posts on click button', () => {
+        const { container, getByRole } = render(<PostsProvider posts={mockData}>  <PostList /></PostsProvider>)
+        const button = getByRole('button');
+        fireEvent.click(button);
+        expect(container.querySelectorAll('h3').length).toEqual(19);
+    });
+    
 });
