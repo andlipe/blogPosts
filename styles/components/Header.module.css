@@ -1,6 +1,5 @@
 .headerContainer {
     width: 100%;
-
     background-color: var(--orange);
     display: flex;
     align-items: center;

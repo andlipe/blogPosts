@@ -4,50 +4,41 @@ import { PostList } from '../components/PostList';
 import styles from '../../styles/pages/Home.module.css';
 import Head from 'next/head';
 import { Header } from '../components/Header';
+
+type PostType = {
+  body: string;
+  id: number;
+  title: string;
+  user: {
+      id: number;
+      name: string;
+  };
+  userId: number;
+}
 interface HomeProps {
-  postList: Array<{}>;
+  fetchPostList: Array<PostType>;
 }
 
 export default function Home(props: HomeProps) {
-
   return (
   <>
-  <div className={styles.container}>
-  <Head>
-        <title> Inicio | BlogX </title>
-  </Head>
-      <Header />
-      <PostList allPosts={props.postList}/>
-  </div> 
+    <div className={styles.container}>
+    <Head>
+          <title> Inicio | BlogX </title>
+    </Head>
+        <Header />
+        <PostList allPosts={props.fetchPostList}/>
+    </div> 
   </>  
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const fetchPost = await fetch('https://jsonplaceholder.typicode.com/posts')
+  const fetchPostList = await fetch('http://localhost:3000/api/posts')
     .then(response => response.json());
-  const fetchUsers = await fetch('https://jsonplaceholder.typicode.com/users')
-  .then(response => response.json());
-  let arrayUsers = [];
-  fetchUsers.map(user => (
-      arrayUsers.push({
-        id: user.id,
-        name: user.name
-      })
-      ))
-  
-    fetchPost.forEach((post) => {
-      let user = arrayUsers.find(element => element.id === post.userId);
-      Object.assign(post, 
-        {user}
-      )
-    })
-
-    const postList = fetchPost.reverse();
-
     return {
       props: {
-        postList: postList,
+        fetchPostList,
       }
     }
 }
