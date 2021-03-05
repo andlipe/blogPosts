@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
-import React from 'react'
+import React from 'react';
+import Head from 'next/head';
 import { PostList } from '../components/PostList';
 import styles from '../styles/pages/Home.module.css';
-import Head from 'next/head';
 import { Header } from '../components/Header';
 import { PostType } from '../types/PostType';
 import { PostsProvider } from '../contexts/PostsContext';
@@ -14,17 +14,17 @@ interface HomeProps {
 export default function Home(props: HomeProps) {
 
   return (
-  <PostsProvider
-    posts={props.fetchPostList}
-  >
     <div className={styles.container}>
     <Head>
           <title> Inicio | BlogX </title>
     </Head>
         <Header />
-        <PostList />
+          <PostsProvider
+          posts={props.fetchPostList}
+          >
+          <PostList />
+        </PostsProvider>
     </div> 
-  </PostsProvider>  
   )
 }
 

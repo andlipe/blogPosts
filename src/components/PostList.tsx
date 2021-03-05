@@ -5,6 +5,7 @@ import { PostsContext } from '../contexts/PostsContext';
 
 export function PostList() {
     const { posts, getMorePosts } = React.useContext(PostsContext);
+    
     return (
         <main className={styles.postListContainer}>
             <h1>Posts mais recentes</h1>
