@@ -8,9 +8,8 @@ interface PostsProviderProps {
 
 interface PostContextData {
     posts: Array<PostType>;
-    setPostList: ([]) => void;
     getMorePosts: () => void;
-    focusPost: PostType
+    focusPost: PostType;
 }
 
 export const PostsContext = React.createContext({} as PostContextData);
@@ -18,18 +17,12 @@ export const PostsContext = React.createContext({} as PostContextData);
 export function PostsProvider({children, ...rest}: PostsProviderProps) {
     const [posts, setPosts] = React.useState([]);
     const [endListPost, setEndListPost] = React.useState(10);
-    const [focusPost, setFocusPost] = React.useState([]);
-
-    function setPostList(postList: Array<PostType>) {
-        setPosts(postList)
-    }
+    const [focusPost, setFocusPost] = React.useState(null);
 
     function getMorePosts() {
         setEndListPost(endListPost + 10);
     }
-    React.useEffect(() => {
-        setFocusPost(rest.posts[0]);
-    }, [])
+    React.useEffect(() => setFocusPost(rest.posts[0]), [])
 
     React.useEffect(() => {
         const paginatePosts = rest.posts.slice(1, endListPost);
@@ -40,7 +33,6 @@ export function PostsProvider({children, ...rest}: PostsProviderProps) {
         <PostsContext.Provider 
         value={{
             posts,
-            setPostList,
             getMorePosts,
             focusPost
         }}>
