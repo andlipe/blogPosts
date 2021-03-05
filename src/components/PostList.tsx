@@ -2,22 +2,23 @@ import React from 'react';
 import styles from '../styles/components/PostList.module.css';
 import Image from 'next/image';
 import { PostsContext } from '../contexts/PostsContext';
+import { PostType } from '../types/PostType';
 
 export function PostList() {
-    const { posts, getMorePosts } = React.useContext(PostsContext);
-    
+    const { posts, getMorePosts, focusPost } = React.useContext(PostsContext);
+
     return (
         <main className={styles.postListContainer}>
             <h1>Posts mais recentes</h1>
             
             <section className={styles.focusPostContainer}>
-            {posts.length > 0 && ( 
+            {focusPost && (
                 <div>
                     <Image src={'/placeholder.png'} width={1024} height={500}/>
-                    <h2>{posts[0].title}</h2>
-                    <span>{posts[0].user.name}</span>
+                    <h2>{focusPost.title}</h2>
+                    <span>{focusPost.user.name}</span>
                 </div>
-                ) }
+            )}     
             </section>
 
             <section className={styles.morePostsContainer}>
