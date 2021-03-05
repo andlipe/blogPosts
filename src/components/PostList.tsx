@@ -1,17 +1,10 @@
 import React from 'react';
-import styles from '../../styles/components/PostList.module.css';
+import styles from '../styles/components/PostList.module.css';
 import Image from 'next/image';
+import { PostsContext } from '../contexts/PostsContext';
 
-export function PostList({allPosts}) {
-    const [posts, setPosts] = React.useState([]);
-    const [endListPost, setEndListPost] = React.useState(10);
-
-    React.useEffect(() => {
-        const paginatePosts = allPosts.slice(0, endListPost);
-        setPosts(paginatePosts);
-    }, [endListPost]);
-
-
+export function PostList() {
+    const { posts, getMorePosts } = React.useContext(PostsContext);
     return (
         <main className={styles.postListContainer}>
             <h1>Posts mais recentes</h1>
@@ -36,7 +29,7 @@ export function PostList({allPosts}) {
             ))}
             </section>
 
-            <button onClick={() => setEndListPost(endListPost + 10)}>Mais posts</button>
+            <button onClick={getMorePosts}>Mais posts</button>
         </main>
     )
 }
