@@ -1,0 +1,84 @@
+.postListContainer {
+    height: 100vh;
+    margin: 0 auto;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: var(--text);
+}
+
+.postListContainer h1 {
+    color: var(--text);
+    margin: 2rem 0;
+}
+
+.postListContainer button {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.focusPostContainer {
+    background-color: var(--gray);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    justify-content: center;
+    max-width: 800px;
+    border-radius: 5px;
+
+}
+
+.focusPostContainer h2 {
+    margin: 0.5rem 0;
+}
+
+.morePostsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.morePostsContainer .post {
+    background-color: var(--gray);
+    width: 20%;
+    margin: 1.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    word-break: break-all;
+}
+
+.morePostsContainer h3 {
+    margin: 0.5rem 0;
+}
+
+.morePostsContainer span {
+    margin: 0.5rem 0;
+}
+
+@media(max-width: 720px) {
+    .focusPostContainer {
+        width: 90%;
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .focusPostContainer div{
+        width: 100%;
+    }
+    .morePostsContainer {
+        flex-direction: column;
+    }
+
+    .morePostsContainer .post {
+        background-color: var(--gray);
+        width: 90%;
+        padding: 1rem;
+
+    }
+}

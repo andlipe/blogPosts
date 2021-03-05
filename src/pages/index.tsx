@@ -1,7 +1,9 @@
 import { GetServerSideProps } from 'next';
 import React from 'react'
 import { PostList } from '../components/PostList';
-import style from '../../styles/pages/Home.module.css';
+import styles from '../../styles/pages/Home.module.css';
+import Head from 'next/head';
+import { Header } from '../components/Header';
 interface HomeProps {
   postList: Array<{}>;
 }
@@ -10,12 +12,13 @@ export default function Home(props: HomeProps) {
 
   return (
   <>
-  <main className={style.container}>
-      <h1>Posts mais recentes</h1>
-      <section className="">
+  <div className={styles.container}>
+  <Head>
+        <title> Inicio | BlogX </title>
+  </Head>
+      <Header />
       <PostList allPosts={props.postList}/>
-      </section>
-    </main>
+  </div> 
   </>  
   )
 }
@@ -42,9 +45,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const postList = fetchPost.reverse();
 
-  return {
-    props: {
-      postList: postList,
+    return {
+      props: {
+        postList: postList,
+      }
     }
-  }
 }
